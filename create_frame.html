@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Frame</title>
+  <!-- Add your CSS here -->
+</head>
+<body>
+  <h1>Create a Farcaster Frame</h1>
+  <form id="frameForm">
+    <label for="title">Title (max 60 characters)</label>
+    <input type="text" id="title" name="title" maxlength="60" required>
+    
+    <label for="description">Description (max 50 characters)</label>
+    <input type="text" id="description" name="description" maxlength="50" required>
+    
+    <label for="farcasterFID">Your Farcaster FID</label>
+    <input type="text" id="farcasterFID" name="farcasterFID" required>
+    
+    <label for="playbackID">Playback ID</label>
+    <input type="text" id="playbackID" name="playbackID" required>
+    
+    <label for="playbackURL">Playback URL (Optional)</label>
+    <input type="url" id="playbackURL" name="playbackURL">
+    
+    <button type="submit">Create Frame</button>
+  </form>
+
+  <script>
+    document.getElementById('frameForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Assume you collect the form data into a variable `frameData`
+      const frameData = {
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        farcasterFID: document.getElementById('farcasterFID').value,
+        playbackID: document.getElementById('playbackID').value,
+        playbackURL: document.getElementById('playbackURL').value
+      };
+
+      // Process form data here if necessary, and then redirect
+      // The destination could be a URL that you construct based on the input
+      // For example, if you were dynamically generating a new page for each frame:
+      const framePageUrl = `https://sharelive-frame.vercel.app/frames/${frameData.playbackID}`;
+
+      // Redirect the user to their new frame page
+      window.location.href = framePageUrl;
+    });
+  </script>
+</body>
+</html>
