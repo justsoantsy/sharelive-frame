@@ -26,6 +26,12 @@ p {
     color: #666;
 }
 
+.intro-text {
+    text-align: center;
+    margin-bottom: 20px; /* Or whatever space you want below the paragraph */
+}
+
+
 /* Full Page Centering */
 .container {
     display: flex;
@@ -36,32 +42,31 @@ p {
     text-align: center;
 }
 
-
 /* App Header Styles */
 .app-header {
     text-align: center;
-    padding: 10px 0; /* Reduced padding */
+    padding: 10px 0;
     margin-bottom: -20px; /* Pulls the content up closer to the header */
 }
 
 .app-name {
-    font-family: 'Syne', sans-serif; /* Specify the Syne font */
-    font-weight: 800; /* Extra Bold weight for the font */
-    font-size: 1.1em; /* Size of the app name text */
-    color: #8B8BFF; /* Color of the app name text, adjust as needed */
-    margin: 0; /* Remove default margins from h1 if used */
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1em;
+    color: #8B8BFF;
+    margin: 0;
 }
 
 .app-name-link {
-    text-decoration: none; /* Removes underline from links */
-    color: inherit; /* The link will inherit the color from its parent element */
-    display: block; /* Makes the link fill the entire header for easier clicking */
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 /* Button styles */
 .btn {
-    font-family: 'Syne', sans-serif; /* Syne font for buttons as well */
-    font-weight: 800; /* Extra Bold for buttons */
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
     display: inline-block;
     background-color: #5D24BB;
     color: #ffffff;
@@ -78,7 +83,6 @@ p {
 .btn:hover {
     background-color: #CDBDFF;
 }
-
 
 /* Form Page Styles */
 .form-container {
@@ -99,21 +103,28 @@ p {
 .form {
     display: flex;
     flex-direction: column;
-    width: 100%; /* Adjust as needed */
-    max-width: 500px; /* Adjust as needed */
+    width: 100%;
+    max-width: 500px;
     background: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .form input[type="text"],
 .form input[type="url"] {
-    padding: 10px;
-    margin-bottom: 10px; /* Adds space between form fields */
-    border: 1px solid #CDBDFF;
-    border-radius: 4px;
+    padding: 10px; /* Adjusted padding */
+    margin-bottom: 10px; /* Adjusts space between form fields */
+    border: 2px solid #CDBDFF;
+    border-radius: 1px;
     height: 40px; /* Ensure the input fields are the same height as the button */
+}
+
+.input-subtitle {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 4px; /* Reduced space below subtitle */
 }
 
 .form button {
@@ -121,8 +132,8 @@ p {
     color: white;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 20px; /* Add a bit more space above the submit button */
-    height: 40px; /* Same height as the input fields */
+    margin-top: 20px;
+    height: 40px;
 }
 
 /* Style adjustments for the frame_created.html page */
@@ -137,13 +148,13 @@ p {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 10px;
-    height: 40px; /* Ensure the URL box is the same height as the button */
+    height: 40px;
 }
 
 .url-container button {
-    padding: 10px 20px; /* Ensure padding is sufficient for the button height */
-    height: 40px; /* Same height as the URL box */
-    white-space: nowrap; /* Prevents text wrapping in the button */
+    padding: 10px 20px;
+    height: 40px;
+    white-space: nowrap;
 }
 
 /* Responsive adjustments */
@@ -156,11 +167,10 @@ p {
     }
     .url-container input[type="text"],
     .url-container button {
-        width: 100%; /* Full width on smaller screens */
-        margin-bottom: 10px; /* Space between the URL box and the button */
+        width: 100%;
+        margin-bottom: 10px;
     }
     .url-container button {
-        margin-bottom: 0; /* Remove the bottom margin on the last element */
+        margin-bottom: 0;
     }
 }
-

@@ -14,21 +14,27 @@
     </header>
   <div class="form-container">
     <h1 class="form-title">Create a Farcaster Frame</h1>
-    <p>Please share some details about your video or livestream. Remember that apps like dragverse.app, hey.xyz, tape,xyz, or bonfire.xyz use Livepeer and you can share their videos.  </p>
+    <p class="intro-text">Please share some details about your video or livestream from apps that use Livepeer like dragverse.app, hey.xyz, tape,xyz, or bonfire.xyz:  </p>
     <form id="frameForm" class="form">
-    <label for="title">Title (max 60 characters)</label>
+
+    <label for="title">Title</label>
+    <p class="input-subtitle">(max 60 characters)</p>
     <input type="text" id="title" name="title" maxlength="60" required>
     
-    <label for="description">Description (max 50 characters)</label>
+    <label for="description">Description</label>
+    <p class="input-subtitle">(max 50 characters)</p> 
     <input type="text" id="description" name="description" maxlength="50" required>
-    
+ 
     <label for="farcasterFID">Your Farcaster FID</label>
+    <p class="input-subtitle">Your FID is your Farcaster identifier</p>   
     <input type="text" id="farcasterFID" name="farcasterFID" required>
     
     <label for="playbackID">Playback ID</label>
+    <p class="input-subtitle">The title of your stream or video.</p>
     <input type="text" id="playbackID" name="playbackID" required>
     
     <label for="playbackURL">Playback URL (Optional)</label>
+    <p class="input-subtitle"> This allows video to start playing in the Frame, if supported by the Farcaster client.</p>
     <input type="url" id="playbackURL" name="playbackURL">
     
     <button type="submit" class="btn">Create Frame</button>
