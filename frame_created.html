@@ -8,12 +8,12 @@
 <body>
     <header class="app-header">
         <a href="index.html" class="app-name-link">
-          <h1 class="app-name">ShareLive</h1>
-      </a>
-      </header>
+            <h1 class="app-name">ShareLive</h1>
+        </a>
+    </header>
     <div class="container">
         <h1>Your Frame is Ready!</h1>
-        <p>Slay! Now you can share this link to Farcaster and share your video or livesream. </p>
+        <p>Slay! Now you can share this link to Farcaster and share your video or livestream. </p>
         <div class="url-container">
             <input type="text" id="frameUrl" readonly>
             <button class="btn" onclick="copyToClipboard()">Copy URL</button>
@@ -21,20 +21,27 @@
     </div>
   
     <script>
-      function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-      }
+        // Function to get a query parameter value by name
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
   
-      document.getElementById('frameUrl').value = getQueryParam('frameUrl');
+        // Setting the frame URL value on page load
+        document.getElementById('frameUrl').value = getQueryParam('frameUrl');
   
-      function copyToClipboard() {
-        const copyText = document.getElementById('frameUrl');
-        copyText.select();
-        document.execCommand('copy');
-        alert('URL copied to clipboard!');
-      }
+        // Function to copy the URL to the clipboard
+        function copyToClipboard() {
+            const copyText = document.getElementById('frameUrl');
+            copyText.select();  // Select the content of the input
+            document.execCommand('copy');  // Copy the selected text to clipboard
+            alert('URL copied to clipboard!');  // Show confirmation to the user
+            
+        // Debugging: Log the fetched URL parameter
+            console.log(getQueryParam('frameUrl'));
+
+        document.getElementById('frameUrl').value = getQueryParam('frameUrl');
+        }
     </script>
 </body>
 </html>
-  

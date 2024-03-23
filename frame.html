@@ -34,23 +34,23 @@
 
     // Function to update the meta tags and video source
     function updateFrame() {
+      const title = getQueryParam('title');
+      const description = getQueryParam('description');
       const videoURL = getQueryParam('playbackURL') || 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8';
-      const imageURL = getQueryParam('playbackImage') || 'https://www.w3schools.com/w3images/mountains.jpg';
-      const videoElement = document.getElementById('my-video');
+      const imageURL = getQueryParam('imageURL') || 'https://www.w3schools.com/w3images/mountains.jpg';
 
-      document.querySelector('meta[property="fc:frame"]').content = 'vNext';
+      document.querySelector('meta[property="fc:frame"]').content = title + ' - ' + description;
       document.querySelector('meta[property="fc:frame:video"]').content = videoURL;
       document.querySelector('meta[property="fc:frame:image"]').content = imageURL;
       document.querySelector('meta[property="og:image"]').content = imageURL;
 
+      const videoElement = document.getElementById('my-video');
       videoElement.src = videoURL;
       videoElement.poster = imageURL;
 
-      // If using Video.js, you might need to initialize the player here
       videojs(videoElement);
     }
 
-    // Update the frame when the DOM is fully loaded
     document.addEventListener('DOMContentLoaded', updateFrame);
   </script>
 </body>
