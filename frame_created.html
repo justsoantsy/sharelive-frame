@@ -1,8 +1,18 @@
-<!-- frame_created.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Frame Created</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
 <body>
-    <h1>Your Frame is Ready!</h1>
-    <input type="text" id="frameUrl" readonly>
-    <button onclick="copyToClipboard()">Copy URL</button>
+    <div class="container">
+        <h1>Your Frame is Ready!</h1>
+        <div class="url-container">
+            <input type="text" id="frameUrl" readonly>
+            <button class="btn" onclick="copyToClipboard()">Copy URL</button>
+        </div>
+    </div>
   
     <script>
       function getQueryParam(param) {
@@ -19,5 +29,6 @@
         alert('URL copied to clipboard!');
       }
     </script>
-  </body>
+</body>
+</html>
   

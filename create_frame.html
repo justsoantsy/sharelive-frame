@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Create Frame</title>
-  <!-- Add your CSS here -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create a Frame</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>Create a Farcaster Frame</h1>
-  <form id="frameForm">
+  <div class="form-container">
+    <h1 class="form-title">Create a Farcaster Frame</h1>
+    <form id="frameForm" class="form">
     <label for="title">Title (max 60 characters)</label>
     <input type="text" id="title" name="title" maxlength="60" required>
     
@@ -23,7 +25,7 @@
     <label for="playbackURL">Playback URL (Optional)</label>
     <input type="url" id="playbackURL" name="playbackURL">
     
-    <button type="submit">Create Frame</button>
+    <button type="submit" class="btn">Create Frame</button>
   </form>
 
   <script>

@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;800&display=swap');
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Typography */
+body {
+    font-family: 'Syne', sans-serif; /* Use the Syne font for the body */
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    font-weight: 800; /* Extra bold for headings */
+    margin-bottom: 0.5em;
+}
+
+p {
+    margin-bottom: 2em;
+    color: #666;
+}
+
+/* Full Page Centering */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Button styles */
+.btn {
+    font-family: 'Syne', sans-serif; /* Syne font for buttons as well */
+    font-weight: 800; /* Extra Bold for buttons */
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    padding: .5em 1em;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    border: none;
+    outline: none;
+    height: 40px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* Form Page Styles */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.form-title {
+    margin-bottom: 1em;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Adjust as needed */
+    max-width: 500px; /* Adjust as needed */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form input[type="text"],
+.form input[type="url"] {
+    padding: 10px;
+    margin-bottom: 10px; /* Adds space between form fields */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 40px; /* Ensure the input fields are the same height as the button */
+}
+
+.form button {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px; /* Add a bit more space above the submit button */
+    height: 40px; /* Same height as the input fields */
+}
+
+/* Style adjustments for the frame_created.html page */
+.url-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.url-container input[type="text"] {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    height: 40px; /* Ensure the URL box is the same height as the button */
+}
+
+.url-container button {
+    padding: 10px 20px; /* Ensure padding is sufficient for the button height */
+    height: 40px; /* Same height as the URL box */
+    white-space: nowrap; /* Prevents text wrapping in the button */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form {
+        width: 90%;
+    }
+    .url-container {
+        flex-direction: column;
+    }
+    .url-container input[type="text"],
+    .url-container button {
+        width: 100%; /* Full width on smaller screens */
+        margin-bottom: 10px; /* Space between the URL box and the button */
+    }
+    .url-container button {
+        margin-bottom: 0; /* Remove the bottom margin on the last element */
+    }
+}
