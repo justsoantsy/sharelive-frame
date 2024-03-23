@@ -1,0 +1,23 @@
+<!-- frame_created.html -->
+<body>
+    <h1>Your Frame is Ready!</h1>
+    <input type="text" id="frameUrl" readonly>
+    <button onclick="copyToClipboard()">Copy URL</button>
+  
+    <script>
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+  
+      document.getElementById('frameUrl').value = getQueryParam('frameUrl');
+  
+      function copyToClipboard() {
+        const copyText = document.getElementById('frameUrl');
+        copyText.select();
+        document.execCommand('copy');
+        alert('URL copied to clipboard!');
+      }
+    </script>
+  </body>
+  

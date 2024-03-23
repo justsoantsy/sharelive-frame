@@ -29,23 +29,9 @@
   <script>
     document.getElementById('frameForm').addEventListener('submit', function(event) {
       event.preventDefault();
-      
-      // Assume you collect the form data into a variable `frameData`
-      const frameData = {
-        title: document.getElementById('title').value,
-        description: document.getElementById('description').value,
-        farcasterFID: document.getElementById('farcasterFID').value,
-        playbackID: document.getElementById('playbackID').value,
-        playbackURL: document.getElementById('playbackURL').value
-      };
-
-      // Process form data here if necessary, and then redirect
-      // The destination could be a URL that you construct based on the input
-      // For example, if you were dynamically generating a new page for each frame:
-      const framePageUrl = `https://sharelive-frame.vercel.app/frames/${frameData.playbackID}`;
-
-      // Redirect the user to their new frame page
-      window.location.href = framePageUrl;
+      const playbackID = document.getElementById('playbackID').value; // Assuming you have an input with ID 'playbackID'
+      const frameUrl = `frame_created.html?frameUrl=https://sharelive-frame.vercel.app/frames/${playbackID}`;
+      window.location.href = frameUrl;
     });
   </script>
 </body>
