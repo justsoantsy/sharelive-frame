@@ -1,0 +1,8 @@
+{
+  "name": "sharelive-frame",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/justsoantsy/sharelive-frame.git",
+  "author": "salti <justsoantsy@gmail.com>",
+  "license": "MIT"
+}
