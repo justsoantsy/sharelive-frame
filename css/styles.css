@@ -39,8 +39,9 @@ p {
 
 /* App Header Styles */
 .app-header {
-    text-align: center; /* Center-align the text */
-    padding: 10px 0; /* Padding above and below the text */
+    text-align: center;
+    padding: 10px 0; /* Reduced padding */
+    margin-bottom: -20px; /* Pulls the content up closer to the header */
 }
 
 .app-name {
