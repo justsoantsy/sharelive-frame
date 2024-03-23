@@ -10,7 +10,7 @@
 /* Typography */
 body {
     font-family: 'Syne', sans-serif; /* Use the Syne font for the body */
-    background-color: #f4f4f4;
+    background-color: #F1EDFF;
     color: #333;
     line-height: 1.6;
     padding: 20px;
@@ -36,12 +36,33 @@ p {
     text-align: center;
 }
 
+
+/* App Header Styles */
+.app-header {
+    text-align: center; /* Center-align the text */
+    padding: 10px 0; /* Padding above and below the text */
+}
+
+.app-name {
+    font-family: 'Syne', sans-serif; /* Specify the Syne font */
+    font-weight: 800; /* Extra Bold weight for the font */
+    font-size: 1.1em; /* Size of the app name text */
+    color: #8B8BFF; /* Color of the app name text, adjust as needed */
+    margin: 0; /* Remove default margins from h1 if used */
+}
+
+.app-name-link {
+    text-decoration: none; /* Removes underline from links */
+    color: inherit; /* The link will inherit the color from its parent element */
+    display: block; /* Makes the link fill the entire header for easier clicking */
+}
+
 /* Button styles */
 .btn {
     font-family: 'Syne', sans-serif; /* Syne font for buttons as well */
     font-weight: 800; /* Extra Bold for buttons */
     display: inline-block;
-    background-color: #007bff;
+    background-color: #5D24BB;
     color: #ffffff;
     text-decoration: none;
     padding: .5em 1em;
@@ -54,7 +75,7 @@ p {
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #CDBDFF;
 }
 
 
@@ -89,13 +110,13 @@ p {
 .form input[type="url"] {
     padding: 10px;
     margin-bottom: 10px; /* Adds space between form fields */
-    border: 1px solid #ccc;
+    border: 1px solid #CDBDFF;
     border-radius: 4px;
     height: 40px; /* Ensure the input fields are the same height as the button */
 }
 
 .form button {
-    background-color: #007bff;
+    background-color: #5D24BB;
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -141,3 +162,4 @@ p {
         margin-bottom: 0; /* Remove the bottom margin on the last element */
     }
 }
+
