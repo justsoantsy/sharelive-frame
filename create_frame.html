@@ -42,22 +42,27 @@
 
   <script>
     document.getElementById('frameForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
-    const farcasterFID = document.getElementById('farcasterFID').value;
-    const playbackID = document.getElementById('playbackID').value;
-    const playbackURL = document.getElementById('playbackURL').value;
-    
-    const queryParams = new URLSearchParams({
-        title,
-        description,
-        farcasterFID,
-        playbackID,
-        playbackURL
-    }).toString();
-    window.location.href = `frame_created.html?${queryParams}`;
-   });
+      event.preventDefault();
+      const title = document.getElementById('title').value;
+      const description = document.getElementById('description').value;
+      const farcasterFID = document.getElementById('farcasterFID').value;
+      const playbackID = document.getElementById('playbackID').value;
+      const playbackURL = document.getElementById('playbackURL').value;
+      
+      // Frame URL construction - Update the pathname as needed for your app
+      const frameUrl = `https://sharelive-frame.vercel.app/frames/${playbackID}`;
+  
+      const queryParams = new URLSearchParams({
+          title,
+          description,
+          farcasterFID,
+          playbackID,
+          playbackURL,
+          frameUrl // Add this line to pass the frameUrl to the next page
+      }).toString();
+      window.location.href = `frame_created.html?${queryParams}`;
+    });
   </script>
+  
 </body>
 </html>
