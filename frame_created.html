@@ -1,85 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Frame Created</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <!-- Open Graph (OG) tags -->
-    <meta property="og:type" content="video.movie" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:video" content="" />
-    <meta property="og:video:type" content="application/x-mpegURL" />
+  <meta charset="UTF-8">
+  <title>Frame Created - ShareLive</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header class="app-header">
-        <a href="index.html" class="app-name-link">
-            <h1 class="app-name">ShareLive</h1>
-        </a>
-    </header>
-    <div class="container">
-        <h1>Your Frame is Ready!</h1>
-        <p>Now you can share this link to Farcaster and share your video or livestream.</p>
-        <div class="url-container">
-            <input type="text" id="frameUrl" readonly>
-            <button class="btn" onclick="copyToClipboard()">Copy URL</button>
-        </div>
+  <header class="app-header">
+    <a href="index.html" class="app-name-link">
+      <h1 class="app-name">ShareLive</h1>
+    </a>
+  </header>
+  
+  <div class="container">
+    <h1>Your Frame is Ready!</h1>
+    <div class="url-container">
+      <input type="text" id="frameUrl" readonly>
+      <button class="btn" onclick="copyToClipboard()">Copy URL</button>
     </div>
+  </div>
 
-    <script>
-        // Function to get query parameters
-        function getQueryParams() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return {
-                title: urlParams.get('title'),
-                description: urlParams.get('description'),
-                image: urlParams.get('image'), // Assuming this will be a parameter in the URL
-                video: urlParams.get('playbackURL'), // Assuming 'playbackURL' is the video URL to be played
-                playbackID: urlParams.get('playbackID') // Assuming this is an identifier for the video
-            };
-        }
-    
-        // Function to update meta tags and document content
-        function updateContent() {
-            const params = getQueryParams();
-            
-            // Update Open Graph tags
-            if (params.title) {
-                document.querySelector('meta[property="og:title"]').setAttribute("content", params.title);
-            }
-            if (params.description) {
-                document.querySelector('meta[property="og:description"]').setAttribute("content", params.description);
-            }
-            if (params.image) {
-                document.querySelector('meta[property="og:image"]').setAttribute("content", params.image);
-            }
-            if (params.video) {
-                document.querySelector('meta[property="og:video"]').setAttribute("content", params.video);
-            }
-    
-            // Construct the frame URL using the 'playbackID' or 'playbackURL'
-            const frameBaseUrl = 'https://sharelive-frame.vercel.app/frame.html';
-            const frameUrl = params.playbackID ? `${frameBaseUrl}?id=${params.playbackID}` : params.video;
-    
-            // Update input value for the URL
-            document.getElementById('frameUrl').value = frameUrl || 'URL not provided';
-        }
-    
-        // Function to copy the URL to the clipboard
-        async function copyToClipboard() {
-            const copyText = document.getElementById('frameUrl');
-            try {
-                await navigator.clipboard.writeText(copyText.value);
-                alert('URL copied to clipboard!');
-            } catch (err) {
-                alert('Failed to copy URL: ', err);
-            }
-        }
-    
-        // Run the content update function on page load
-        updateContent();
-    </script>    
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    function updateFrameUrl() {
+      const frameUrl = `https://sharelive-frame.vercel.app/frame.html?title=${getQueryParam('title')}&playbackID=${getQueryParam('playbackID')}&playbackURL=${getQueryParam('playbackURL')}`;
+      document.getElementById('frameUrl').value = frameUrl;
+    }
+
+    function copyToClipboard() {
+      const copyText = document.getElementById('frameUrl');
+      copyText.select();
+      document.execCommand('copy');
+      alert('URL copied to clipboard!');
+    }
+
+    document.addEventListener('DOMContentLoaded', updateFrameUrl);
+  </script>
 </body>
 </html>
-

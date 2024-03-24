@@ -174,3 +174,20 @@ p {
         margin-bottom: 0;
     }
 }
+
+.fallback-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 640px;
+    height: 264px;
+    background-color: #110C37;
+    color: #110C37;
+  }
+  
+  .watch-now {
+    color: #110C37;
+    font-weight: 800; 
+  }
+  

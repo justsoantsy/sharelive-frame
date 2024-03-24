@@ -2,62 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create a Frame</title>
+  <title>Create a Frame - ShareLive</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header class="app-header">
-        <a href="index.html" class="app-name-link">
-          <h1 class="app-name">ShareLive</h1>
-      </a>
-    </header>
+  <header class="app-header">
+    <a href="index.html" class="app-name-link">
+      <h1 class="app-name">ShareLive</h1>
+    </a>
+  </header>
+  
   <div class="form-container">
     <h1 class="form-title">Create a Farcaster Frame</h1>
-    <p class="intro-text">Please share some details about your video or livestream from apps that use Livepeer like dragverse.app, hey.xyz, tape,xyz, or bonfire.xyz:  </p>
     <form id="frameForm" class="form">
+      <label for="title">Video Title (optional)</label>
+      <input type="text" id="title" name="title" placeholder="Enter title (optional)">
 
-    <label for="title">Title</label>
-    <p class="input-subtitle">(max 60 characters)</p>
-    <input type="text" id="title" name="title" maxlength="60" required>
-    
-    <label for="description">Description</label>
-    <p class="input-subtitle">(max 50 characters)</p> 
-    <input type="text" id="description" name="description" maxlength="50" required>
- 
-    <label for="farcasterFID">Your Farcaster FID</label>
-    <p class="input-subtitle">Your FID is your Farcaster identifier</p>   
-    <input type="text" id="farcasterFID" name="farcasterFID" required>
-    
-    <label for="playbackID">Playback ID</label>
-    <p class="input-subtitle">i.e.  dragverse.app/watch/[PLAYBACK_ID]</p>
-    <input type="text" id="playbackID" name="playbackID" required>
-    
-    <label for="playbackURL">Playback URL (Optional)</label>
-    <p class="input-subtitle"> This allows video to start playing in the Frame, if supported by the Farcaster client.</p>
-    <input type="url" id="playbackURL" name="playbackURL">
-    
-    <button type="submit" class="btn">Create Frame</button>
-  </form>
+      <label for="playbackID">Video Playback ID</label>
+      <input type="text" id="playbackID" name="playbackID" required placeholder="Enter the video playback ID">
+
+      <label for="playbackURL">Live Stream Playback URL (optional)</label>
+      <input type="url" id="playbackURL" name="playbackURL" placeholder="Enter livestream URL (optional)">
+
+      <button type="submit" class="btn">Create Frame</button>
+    </form>
+  </div>
+
   <script>
     document.getElementById('frameForm').addEventListener('submit', function(event) {
       event.preventDefault();
-      const title = document.getElementById('title').value;
-      const description = document.getElementById('description').value;
-      const farcasterFID = document.getElementById('farcasterFID').value;
+      const title = document.getElementById('title').value || 'NEW VIDEO';
       const playbackID = document.getElementById('playbackID').value;
-      const playbackURL = document.getElementById('playbackURL').value;
-      
-      // Construct the query parameters for frame_created.html
-      const queryParams = new URLSearchParams({
-          title,
-          description,
-          farcasterFID,
-          playbackID,
-          playbackURL
-      }).toString();
-  
-      // Redirect to the frame_created.html with query parameters
+      const playbackURL = document.getElementById('playbackURL').value || `https://sharelive-frame.vercel.app/frame.html?${playbackID}`; // replace with actual video template URL
+
+      // Construct the query parameters
+      const queryParams = new URLSearchParams({ title, playbackID, playbackURL }).toString();
       window.location.href = `frame_created.html?${queryParams}`;
     });
   </script>

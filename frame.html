@@ -6,78 +6,47 @@
   <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
   <title>Frame - ShareLive</title>
   <link rel="stylesheet" href="css/styles.css">
-  <!-- Meta tags will be filled with JavaScript based on the URL parameters -->
-  <!-- The fc:frame meta tags are not standard OG tags and may not be used by most platforms. -->
-  <meta property="og:title" content="" />
-  <meta property="og:description" content="" />
-  <meta property="og:image" content="" />
-  <meta property="og:video" content="" />
-  <meta property="og:video:type" content="application/x-mpegURL" />
 </head>
 <body>
-  <!-- Container for dynamically loaded content -->
-  <div id="content-container"></div>
+  <div id="frame-content"></div>
 
   <script>
-    // Function to retrieve URL parameters
+    // Default values
+    const defaultImage = 'https://static.wixstatic.com/media/707696_0e1d8dd641a8446282a0eaac71bed7a6~mv2.png'; // Provide the path to your default image
+    const defaultTitle = 'NEW VIDEO';
+
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
     }
-  
-    // Function to dynamically create content based on the provided metadata
-    function createContent() {
-      const title = getQueryParam('title');
-      const description = getQueryParam('description');
+
+    function setupFrame() {
+      const userTitle = getQueryParam('title');
       const videoURL = getQueryParam('playbackURL');
-      const imageURL = getQueryParam('image');
-      const container = document.getElementById('content-container');
+      const imageURL = getQueryParam('image') || defaultImage;
+      const title = userTitle || defaultTitle;
 
-      // Clear previous content
-      container.innerHTML = '';
+      const frameContent = document.getElementById('frame-content');
 
-      // Prioritize video if provided
       if (videoURL) {
-        const videoElement = document.createElement('video');
-        videoElement.className = 'video-js';
-        videoElement.controls = true;
-        videoElement.preload = 'auto';
-        videoElement.style.width = '640px';
-        videoElement.style.height = '264px';
-        videoElement.poster = imageURL || 'https://static.wixstatic.com/media/707696_0e1d8dd641a8446282a0eaac71bed7a6~mv2.png'; // Specify a default poster image file
-        videoElement.innerHTML = `<source src="${videoURL}" type="application/x-mpegURL">`;
-        container.appendChild(videoElement);
-        videojs(videoElement);
-      }
-      // Fallback to image if video is not provided
-      else if (imageURL) {
-        const imageElement = document.createElement('img');
-        imageElement.src = imageURL;
-        imageElement.style.width = '640px';
-        imageElement.style.height = '264px';
-        imageElement.alt = 'Fallback image';
-        container.appendChild(imageElement);
-      }
-      // Fallback to colored background with text
-      else {
-        const background = document.createElement('div');
-        background.style.backgroundColor = '#110C37'; // Default background color
-        background.style.width = '640px';
-        background.style.height = '264px';
-        background.style.color = '#fff'; // Text color
-        background.style.display = 'flex';
-        background.style.alignItems = 'center';
-        background.style.justifyContent = 'center';
-        background.style.flexDirection = 'column';
-        background.innerHTML = `
-          <h1 style="font-weight: 800;">${title || 'Title Not Provided'}</h1>
-          <p style="font-weight: 800; color: #E748E6;">WATCH NOW</p>
-  `;
-        container.appendChild(background);
+        // If there's a video URL, attempt to play the video
+        frameContent.innerHTML = `
+          <video id="video-player" class="video-js" controls preload="auto" width="640" height="360" poster="${imageURL}" data-setup="{}">
+            <source src="${videoURL}" type="application/x-mpegURL" />
+          </video>
+        `;
+        videojs(document.getElementById('video-player'));
+      } else {
+        // If the video URL isn't provided or can't be played, show the title and image with 50% opacity
+        frameContent.innerHTML = `
+          <div style="background-image: url('${imageURL}'); background-size: cover; opacity: 0.8; width: 640px; height: 360px; position: relative;display: flex; justify-content: center; align-items: center;">
+            <h2 class="watch-now" style="font-size: 2.5em; font-weight: 800;">${title}</h2>
+          </div>
+        `;
       }
     }
-  
-    document.addEventListener('DOMContentLoaded', createContent);
+
+    document.addEventListener('DOMContentLoaded', setupFrame);
   </script>  
 </body>
 </html>
