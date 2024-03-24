@@ -31,27 +31,34 @@
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
     }
-
+  
     // Function to update the meta tags and video source
     function updateFrame() {
       const title = getQueryParam('title');
       const description = getQueryParam('description');
       const videoURL = getQueryParam('playbackURL') || 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8';
-      const imageURL = getQueryParam('imageURL') || 'https://www.w3schools.com/w3images/mountains.jpg';
-
+      const imageURL = getQueryParam('image') || 'https://www.w3schools.com/w3images/mountains.jpg';
+  
+      // Update meta tags
       document.querySelector('meta[property="fc:frame"]').content = title + ' - ' + description;
       document.querySelector('meta[property="fc:frame:video"]').content = videoURL;
       document.querySelector('meta[property="fc:frame:image"]').content = imageURL;
       document.querySelector('meta[property="og:image"]').content = imageURL;
-
+  
+      // Update video source and poster
       const videoElement = document.getElementById('my-video');
-      videoElement.src = videoURL;
+      const sourceElement = videoElement.querySelector('source');
+      sourceElement.src = videoURL;
+      sourceElement.type = 'application/x-mpegURL';
       videoElement.poster = imageURL;
-
-      videojs(videoElement);
+  
+      // Reinitialize Video.js player
+      videojs(videoElement).ready(function() {
+        this.load();
+      });
     }
-
+  
     document.addEventListener('DOMContentLoaded', updateFrame);
-  </script>
+  </script>  
 </body>
 </html>

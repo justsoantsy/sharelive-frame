@@ -32,14 +32,14 @@
         function getQueryParams() {
             const urlParams = new URLSearchParams(window.location.search);
             return {
-                frameUrl: urlParams.get('frameUrl'),
                 title: urlParams.get('title'),
                 description: urlParams.get('description'),
-                image: urlParams.get('image'),
-                video: urlParams.get('video')
+                image: urlParams.get('image'), // Assuming this will be a parameter in the URL
+                video: urlParams.get('playbackURL'), // Assuming 'playbackURL' is the video URL to be played
+                playbackID: urlParams.get('playbackID') // Assuming this is an identifier for the video
             };
         }
-
+    
         // Function to update meta tags and document content
         function updateContent() {
             const params = getQueryParams();
@@ -57,26 +57,29 @@
             if (params.video) {
                 document.querySelector('meta[property="og:video"]').setAttribute("content", params.video);
             }
-
+    
+            // Construct the frame URL using the 'playbackID' or 'playbackURL'
+            const frameBaseUrl = 'https://sharelive-frame.vercel.app/frame.html';
+            const frameUrl = params.playbackID ? `${frameBaseUrl}?id=${params.playbackID}` : params.video;
+    
             // Update input value for the URL
-            document.getElementById('frameUrl').value = params.frameUrl || 'URL not provided';
+            document.getElementById('frameUrl').value = frameUrl || 'URL not provided';
         }
-
+    
         // Function to copy the URL to the clipboard
         async function copyToClipboard() {
-         const copyText = document.getElementById('frameUrl');
-         try {
-            await navigator.clipboard.writeText(copyText.value);
-            alert('URL copied to clipboard!');
-        } catch (err) {
-            alert('Failed to copy URL: ', err);
+            const copyText = document.getElementById('frameUrl');
+            try {
+                await navigator.clipboard.writeText(copyText.value);
+                alert('URL copied to clipboard!');
+            } catch (err) {
+                alert('Failed to copy URL: ', err);
+            }
         }
-        }
-
-
+    
         // Run the content update function on page load
         updateContent();
-    </script>
+    </script>    
 </body>
 </html>
 

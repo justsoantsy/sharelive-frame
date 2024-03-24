@@ -39,7 +39,6 @@
     
     <button type="submit" class="btn">Create Frame</button>
   </form>
-
   <script>
     document.getElementById('frameForm').addEventListener('submit', function(event) {
       event.preventDefault();
@@ -49,17 +48,16 @@
       const playbackID = document.getElementById('playbackID').value;
       const playbackURL = document.getElementById('playbackURL').value;
       
-      // Frame URL construction - Update the pathname as needed for your app
-      const frameUrl = `https://sharelive-frame.vercel.app/frames/${playbackID}`;
-  
+      // Construct the query parameters for frame_created.html
       const queryParams = new URLSearchParams({
           title,
           description,
           farcasterFID,
           playbackID,
-          playbackURL,
-          frameUrl // Add this line to pass the frameUrl to the next page
+          playbackURL
       }).toString();
+  
+      // Redirect to the frame_created.html with query parameters
       window.location.href = `frame_created.html?${queryParams}`;
     });
   </script>
