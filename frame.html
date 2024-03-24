@@ -2,51 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
-  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
   <title>Frame - ShareLive</title>
   <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Open Graph tags for web2 platforms -->
+  <meta property="og:type" content="video.other" />
+  <meta property="og:title" content="New Video" />
+  <meta property="og:description" content="A new video is ready to watch!" />
+  <meta property="og:image" content="default-thumbnail.jpg" />
+  <meta property="og:video" content="" />
+  <meta property="og:video:type" content="application/x-mpegURL" />
+
+  <!-- Farcaster-specific tags for Warpcast -->
+  <meta property="fc:frame:video" content="" />
+  <meta property="fc:frame:video:type" content="application/x-mpegURL" />
+
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 </head>
 <body>
-  <div id="frame-content"></div>
+
+  <!-- Video player placeholder -->
+  <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="" data-setup="{}">
+    <source src="" type="application/x-mpegURL" />
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that supports HTML5 video
+    </p>
+  </video>
 
   <script>
-    // Default values
-    const defaultImage = 'https://static.wixstatic.com/media/707696_0e1d8dd641a8446282a0eaac71bed7a6~mv2.png'; // Provide the path to your default image
-    const defaultTitle = 'NEW VIDEO';
-
+    // Function to retrieve URL parameters
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
     }
 
-    function setupFrame() {
-      const userTitle = getQueryParam('title');
+    // Function to update the meta tags and video source
+    function updateFrame() {
+      const title = getQueryParam('title') || 'New Video';
+      const description = getQueryParam('description') || 'A new video is ready to watch!';
       const videoURL = getQueryParam('playbackURL');
-      const imageURL = getQueryParam('image') || defaultImage;
-      const title = userTitle || defaultTitle;
-
-      const frameContent = document.getElementById('frame-content');
+      const defaultImage = 'default-thumbnail.jpg'; // Replace with your default image URL
+      
+      // Set Open Graph tags
+      document.querySelector('meta[property="og:title"]').content = title;
+      document.querySelector('meta[property="og:description"]').content = description;
+      document.querySelector('meta[property="og:image"]').content = defaultImage;
 
       if (videoURL) {
-        // If there's a video URL, attempt to play the video
-        frameContent.innerHTML = `
-          <video id="video-player" class="video-js" controls preload="auto" width="640" height="360" poster="${imageURL}" data-setup="{}">
-            <source src="${videoURL}" type="application/x-mpegURL" />
-          </video>
-        `;
-        videojs(document.getElementById('video-player'));
+        // Set video URL if provided
+        document.querySelector('meta[property="og:video"]').content = videoURL;
+        document.querySelector('meta[property="og:video:type"]').content = "application/x-mpegURL";
+        document.querySelector('meta[property="fc:frame:video"]').content = videoURL;
+        // Update video source and poster
+        document.getElementById('my-video').src = videoURL;
+        document.getElementById('my-video').poster = defaultImage; // You can also add an actual poster if you have
       } else {
-        // If the video URL isn't provided or can't be played, show the title and image with 50% opacity
-        frameContent.innerHTML = `
-          <div style="background-image: url('${imageURL}'); background-size: cover; opacity: 0.8; width: 640px; height: 360px; position: relative;display: flex; justify-content: center; align-items: center;">
-            <h2 class="watch-now" style="font-size: 2.5em; font-weight: 800;">${title}</h2>
-          </div>
-        `;
+        // If no videoURL is provided, only the image will be displayed
+        document.getElementById('my-video').style.display = 'none';
       }
+      
+      // Reinitialize Video.js player
+      videojs(document.getElementById('my-video'));
     }
 
-    document.addEventListener('DOMContentLoaded', setupFrame);
+    document.addEventListener('DOMContentLoaded', updateFrame);
   </script>  
+
 </body>
 </html>
