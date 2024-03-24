@@ -1,64 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
-  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
-  <title>Frame - ShareLive</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <!-- Meta tags will be filled with JavaScript based on the URL parameters -->
-  <meta property="fc:frame" content="" />
-  <meta property="fc:frame:video" content="" />
-  <meta property="fc:frame:video:type" content="application/x-mpegURL" />
-  <meta property="fc:frame:image" content="" />
-  <meta property="og:image" content="" />
-</head>
-<body>
+<script>
+  // Function to retrieve URL parameters
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
 
-  <!-- Video player placeholder -->
-  <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="" data-setup="{}">
-    <source src="" type="application/x-mpegURL" />
-    <p class="vjs-no-js">
-      To view this video please enable JavaScript, and consider upgrading to a
-      web browser that
-      <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-    </p>
-  </video>
-
-  <script>
-    // Function to retrieve URL parameters
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
+  // Function to update the meta tags and video source
+  function updateFrame() {
+    const title = getQueryParam('title');
+    const description = getQueryParam('description');
+    const videoURL = getQueryParam('playbackURL');
+    const imageURL = getQueryParam('image') || 'default-image-url.jpg'; // Replace with your default image URL
+    
+    // Update meta tags
+    if (title && description) {
+      document.querySelector('meta[property="og:title"]').content = title;
+      document.querySelector('meta[property="og:description"]').content = description;
     }
-  
-    // Function to update the meta tags and video source
-    function updateFrame() {
-      const title = getQueryParam('title');
-      const description = getQueryParam('description');
-      const videoURL = getQueryParam('playbackURL') || 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8';
-      const imageURL = getQueryParam('image') || 'https://www.w3schools.com/w3images/mountains.jpg';
-  
-      // Update meta tags
-      document.querySelector('meta[property="fc:frame"]').content = title + ' - ' + description;
-      document.querySelector('meta[property="fc:frame:video"]').content = videoURL;
-      document.querySelector('meta[property="fc:frame:image"]').content = imageURL;
-      document.querySelector('meta[property="og:image"]').content = imageURL;
-  
+    
+    if (videoURL) {
       // Update video source and poster
       const videoElement = document.getElementById('my-video');
       const sourceElement = videoElement.querySelector('source');
       sourceElement.src = videoURL;
       sourceElement.type = 'application/x-mpegURL';
-      videoElement.poster = imageURL;
-  
-      // Reinitialize Video.js player
-      videojs(videoElement).ready(function() {
-        this.load();
-      });
+      videoElement.load(); // Load the new video source
+      
+      // Update Open Graph video meta if necessary
+      document.querySelector('meta[property="og:video"]').content = videoURL;
+      document.querySelector('meta[property="og:video:type"]').content = 'application/x-mpegURL';
     }
-  
-    document.addEventListener('DOMContentLoaded', updateFrame);
-  </script>  
-</body>
-</html>
+    
+    if (imageURL) {
+      // Update meta tags and video poster image
+      document.querySelector('meta[property="og:image"]').content = imageURL;
+      document.getElementById('my-video').poster = imageURL;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', updateFrame);
+</script>
